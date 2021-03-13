@@ -102,7 +102,7 @@ Additions(Average): 26014 Deletions(Average): 32166
 Additions(Average): 22529 Deletions(Average): 10397
 
 =================================================
-👑 AdditioDeletionsns average by User Top3
+👑 Deletions average by User Top3
 =================================================
 1. philwebb
 Additions(Average): 26014 Deletions(Average): 32166

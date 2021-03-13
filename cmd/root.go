@@ -122,7 +122,7 @@ var (
 			printPrsRanking(addAndDelTop10, "👑 Additions+Deletions Top"+strconv.Itoa(numberOfRanking))
 
 			printAuthorsRanking(byAuthorsAddTop10, byAuthorsAddMap, byAuthorsDelMap, "👑 Additions average by User Top"+strconv.Itoa(numberOfRanking))
-			printAuthorsRanking(byAuthorsDelTop10, byAuthorsAddMap, byAuthorsDelMap, "👑 AdditioDeletionsns average by User Top"+strconv.Itoa(numberOfRanking))
+			printAuthorsRanking(byAuthorsDelTop10, byAuthorsAddMap, byAuthorsDelMap, "👑 Deletions average by User Top"+strconv.Itoa(numberOfRanking))
 			printAuthorsRanking(byAuthorsAddAndDelTop10, byAuthorsAddMap, byAuthorsDelMap, "👑 Additions+Deletions average by User Top"+strconv.Itoa(numberOfRanking))
 		},
 	}
