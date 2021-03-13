@@ -154,7 +154,7 @@ func printAuthorsRanking(ucs []userAndCount, addMap map[string]int, delMap map[s
 	for i, uc := range ucs {
 		if i == 0 {
 			fmt.Println("=================================================")
-			fmt.Printf("👑%v. %v\n", i+1, uc.name)
+			fmt.Printf("%v. %v\n", i+1, uc.name)
 		} else {
 			fmt.Println("-------------------------------------------------")
 			fmt.Printf("%v. %v\n", i+1, uc.name)

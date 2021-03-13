@@ -92,7 +92,7 @@ https://github.com/spring-projects/spring-security/pull/7579
 =================================================
 👑 Additions average by User Top3
 =================================================
-👑1. Choi-JinHwan
+1. Choi-JinHwan
 Additions(Average): 97451 Deletions(Average): 29148
 -------------------------------------------------
 2. philwebb
@@ -104,7 +104,7 @@ Additions(Average): 22529 Deletions(Average): 10397
 =================================================
 👑 AdditioDeletionsns average by User Top3
 =================================================
-👑1. philwebb
+1. philwebb
 Additions(Average): 26014 Deletions(Average): 32166
 -------------------------------------------------
 2. Choi-JinHwan
@@ -116,7 +116,7 @@ Additions(Average): 22529 Deletions(Average): 10397
 =================================================
 👑 Additions+Deletions average by User Top3
 =================================================
-👑1. Choi-JinHwan
+1. Choi-JinHwan
 Additions(Average): 97451 Deletions(Average): 29148
 -------------------------------------------------
 2. philwebb
