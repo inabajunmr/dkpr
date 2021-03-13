@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/cheggaaa/pb"
 	"github.com/google/go-github/v33/github"
 	"github.com/spf13/cobra"
 	"golang.org/x/oauth2"
@@ -64,7 +65,6 @@ func init() {
 }
 
 func getAllPrs(client *github.Client, owner string, repository string) []*github.PullRequest {
-	var allPrs []*github.PullRequest
 	opt := &github.PullRequestListOptions{
 		ListOptions: github.ListOptions{PerPage: 100},
 		State:       "all",
@@ -72,32 +72,35 @@ func getAllPrs(client *github.Client, owner string, repository string) []*github
 
 	ctx := context.Background()
 
-	index := 0
+	var allPrsWithoutDetails []*github.PullRequest
 	for {
 		prs, resp, err := client.PullRequests.List(ctx, owner, repository, opt)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			os.Exit(1)
 		}
+		allPrsWithoutDetails = append(allPrsWithoutDetails, prs...)
 		opt.Page = resp.NextPage
-
-		for _, pr := range prs {
-			prd, _, err := client.PullRequests.Get(ctx, owner, repository, pr.GetNumber())
-			if err != nil {
-				fmt.Fprintln(os.Stderr, err)
-				os.Exit(1)
-			}
-			allPrs = append(allPrs, prd)
-			index++
-			if index%10 == 0 {
-				fmt.Println(index)
-			}
-		}
 
 		if resp.NextPage == 0 {
 			break
 		}
 	}
+
+	bar := pb.StartNew(len(allPrsWithoutDetails))
+
+	var allPrs []*github.PullRequest
+	for _, pr := range allPrsWithoutDetails {
+		prd, _, err := client.PullRequests.Get(ctx, owner, repository, pr.GetNumber())
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+			os.Exit(1)
+		}
+		allPrs = append(allPrs, prd)
+		bar.Increment()
+	}
+
+	bar.Finish()
 	return allPrs
 }
 
