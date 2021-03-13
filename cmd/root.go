@@ -7,6 +7,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/cheggaaa/pb"
 	"github.com/google/go-github/v33/github"
@@ -200,16 +201,32 @@ func getAllPrs(client *github.Client, owner string, repository string) []*github
 
 	bar := pb.StartNew(len(allPrsWithoutDetails))
 
+	ch := make(chan *github.PullRequest, len(allPrsWithoutDetails))
 	var allPrs []*github.PullRequest
+	semaphore := make(chan int, 8)
+	var wg sync.WaitGroup
+
 	for _, pr := range allPrsWithoutDetails {
-		prd, _, err := client.PullRequests.Get(ctx, owner, repository, pr.GetNumber())
-		if err != nil {
-			fmt.Fprintln(os.Stderr, err)
-			os.Exit(1)
-		}
-		allPrs = append(allPrs, prd)
-		bar.Increment()
+		wg.Add(1)
+		go func(p *github.PullRequest) {
+			defer wg.Done()
+			semaphore <- 1
+
+			prd, _, err := client.PullRequests.Get(ctx, owner, repository, p.GetNumber())
+			if err != nil {
+				fmt.Fprintln(os.Stderr, err)
+				os.Exit(1)
+			}
+			ch <- prd
+			bar.Increment()
+			<-semaphore
+		}(pr)
 	}
+
+	for i := 0; i < len(allPrsWithoutDetails); i++ {
+		allPrs = append(allPrs, <-ch)
+	}
+	close(ch)
 
 	bar.Finish()
 	return allPrs
