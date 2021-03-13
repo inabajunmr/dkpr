@@ -37,7 +37,7 @@ Default ranking will be shown until top 3.
 If you want to get top 5, you can do like following command.
 
 ```
-dkpr inabajunmr/dkpr --token xxxxx --numberOfRanking 
+dkpr inabajunmr/dkpr --token xxxxx --numberOfRanking 3
 ```
 ### Sample
 
