@@ -2,13 +2,17 @@
 
 Show dekai Pull Request ranking from GitHub repository.
 
-## ⚠Caution
+## ⚠ Caution
 
 This tool doesn't consider [GitHub API Rate limit](https://docs.github.com/en/rest/overview/resources-in-the-rest-api#rate-limiting).
 
 When you use this tool to too much repository or repository with too much Pull Requests, GitHub will return 403 and further requests will restricted.
 
-## Usage
+```
+403 API rate limit of 5000 still exceeded until 2021-03-13 16:35:45 +0900 JST, not making remote request.
+```
+
+## 📔 Usage
 
 ### Install
 
