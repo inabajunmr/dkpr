@@ -141,7 +141,7 @@ func printPrsRanking(prs []*github.PullRequest, label string) {
 			fmt.Printf("%v. %v\n", i+1, pr.GetTitle())
 		}
 		fmt.Printf("Additions: %v Deletions: %v\n", pr.GetAdditions(), pr.GetDeletions())
-		fmt.Printf("%v\n", pr.GetURL())
+		fmt.Printf("%v\n", pr.GetHTMLURL())
 	}
 
 	fmt.Println()
@@ -158,7 +158,7 @@ func printAuthorsRanking(ucs []userAndCount, addMap map[string]int, delMap map[s
 			fmt.Println("-------------------------------------------------")
 			fmt.Printf("%v. %v\n", i+1, uc.name)
 		}
-		fmt.Printf("Additions: %v Deletions: %v\n", addMap[uc.name], delMap[uc.name])
+		fmt.Printf("Additions(Average): %v Deletions(Average): %v\n", addMap[uc.name], delMap[uc.name])
 	}
 
 	fmt.Println()
